@@ -50,24 +50,16 @@ export default class ProductTileList extends LightningElement {
 
     connectedCallback() {
         // Subscribe to ProductsFiltered message
-        this.productFilterSubscription = subscribe(
-            this.messageContext,
-            PRODUCTS_FILTERED_MESSAGE,
-            (message) => this.handleFilterChange(message)
-        );
+        this.productFilterSubscription = subscribe(this.messageContext,PRODUCTS_FILTERED_MESSAGE,(message) => this.handleFilterChange(message));
     }
 
     handleProductSelected(event) {
         // Published ProductSelected message
-        publish(this.messageContext, PRODUCT_SELECTED_MESSAGE, {
-            productId: event.detail
-        });
+        publish(this.messageContext, PRODUCT_SELECTED_MESSAGE, {productId: event.detail});
     }
 
     handleSearchKeyChange(event) {
-        this.filters = {
-            searchKey: event.target.value.toLowerCase()
-        };
+        this.filters = {searchKey: event.target.value.toLowerCase()};
         this.pageNumber = 1;
     }
 
